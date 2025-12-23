@@ -30,11 +30,10 @@
                     </article>
                 </article>
             {% else %}
-                <p class="text-danger">No cart items found.</p>
+                <p class="text-danger">No items found.</p>
             {% endfor %}
 
-
-                <article class="col-3" style="position: absolute; top: 25vh; right: 6%; ">
+                <article class="col-3 position-fixed end-cust">
                     <div class="detls2" style="background: #bdbbbb; width:fit-content">
                         <h4>Cart summary</h4>
                         <div class="border-top border-dark text-center">
@@ -43,11 +42,10 @@
                         </div> 
                         <footer class="border-top border-dark">
                             <form action="">
-                                <button type="button" class="btn border border-2 border-secondary my-2 mx-5" data-bs-toggle="modal" data-bs-target="#orderModal" id="seccalc">
+                                <button type="button" class="btn  bg-secondary text-white border border-2 border-secondary my-2 mx-5" data-bs-toggle="modal" data-bs-target="#orderModal" id="seccalc">
                                     Place order
                                 </button>
-                            </form>
-                           
+                            </form>                            
                         </footer>                      
                     </div>
                 </article>            

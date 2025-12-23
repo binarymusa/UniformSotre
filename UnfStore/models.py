@@ -1,8 +1,11 @@
 
-from UnfStore import db,login_manager
+from UnfStore import db,login_manager, app
 from UnfStore import bcrypt
 from flask_login import UserMixin
-from flask import flash
+from flask import flash, request,current_app
+from itsdangerous import TimedSerializer as Serializer
+from time import *
+import hashlib
 
 # tells Flask-Login that the function (load_user) should be used to retrieve a user object when a user is logged in and their session needs to be managed.
 @login_manager.user_loader
@@ -17,8 +20,10 @@ class User(db.Model, UserMixin):
     email_address = db.Column(db.String(length=50), nullable=False, unique=True)
     password_hash = db.Column(db.String(length=60), nullable=False)
     budget = db.Column(db.Integer(), nullable=False, default=1000000) # default budget money
+    # email_confirmed = db.Column(db.Boolean(), default=False)
     
     role = db.relationship('Roles', backref='users')
+    posts = db.relationship('Userposts', backref='users')
     cart_rltship = db.relationship('Cart', backref='users', lazy=True)
     order_rltship = db.relationship('Orders', backref='users', lazy=True)
 
@@ -83,6 +88,40 @@ class User(db.Model, UserMixin):
             return True
         else:
             return False
+        
+    def generate_confirmation_token(self, expiration=3600):
+        s = Serializer(current_app.config['SECRET_KEY'], expiration)
+        return s.dumps({'confirm': self.id})
+    
+    def confirm(self, token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token)
+        except:
+            return False
+        if data.get('confirm') != self.id:
+            return False
+        self.confirmed = True
+        db.session.add(self)
+        return True
+    
+    def gravatar(self, size=100, default='identicon', rating='g'):
+        if request.is_secure:
+            url = 'https://secure.gravatar.com/avatar'
+        else:
+            url = 'http://www.gravatar.com/avatar'
+        hash = hashlib.md5(self.email.encode('utf-8')).hexdigest()
+        return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
+            url=url, hash=hash, size=size, default=default, rating=rating)
+
+class Userposts(db.Model):
+    datetime =''
+
+    id = db.Column(db.Integer(), primary_key=True)
+    body = db.Column(db.Text)
+    # timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
+   
 
 # User roles database
 class Roles(db.Model):

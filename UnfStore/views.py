@@ -21,8 +21,10 @@ def fits_by_gender():
 # @views_blueprint.route('/login_page', methods=['GET', 'POST'])
 def login_page():
    if request.method == 'POST':
-      username = request.form['username']
-      password = request.form['password']
+      # username = request.form['username']
+      # password = request.form['password']
+      username = request.form.get('username','empty')
+      password = request.form.get('password', 'empty')
 
       check_user = User.query.filter_by(username=username).first()
 
@@ -64,23 +66,41 @@ def signup_page():
                flash('Invalid email address!', category='danger')
                return redirect(url_for('signup_page'))
             else:
-               # return True
-               print(email)           
+               print(email)        
                # Add the new user to database
                new_user = User(username=username, email_address=email, password=password)
                db.session.add(new_user)
                db.session.commit()
+               # token = User.generate_confirmation_token()
+               # print(token)
 
                login_user(new_user)
-               flash(f'signup successful', category='success')  
-               return redirect(url_for('boys_page'))     
+               flash(f'signup successful', category='success') 
+               # return redirect(url_for('views.boys_page')) 
+               return redirect(url_for('confirm'))        
          except:
             flash('an error occured', category='danger')
 
       return render_template('signup.html')
    else:
       return render_template('signup.html')
+   
+@app.route('/profile_page' , methods=['GET', 'POST'])
+def profile_page():
+   return render_template('profile.html')
 
+@app.route('/Email_validate_page', methods=['GET' , 'POST'])
+@login_required
+def confirm():
+   # if current_user.email_confirmed:
+   #    return redirect(url_for('boys_page'))
+   # if current_user.confirm(token):
+   #    flash('You have confirmed your account. Thanks!')
+   #    return redirect(url_for('boys_page'))
+   # else:
+   #    flash('The confirmation link is invalid or has expired.')
+   #    # return redirect(url_for(''))
+   return render_template('includes/auth_conf.html')
 
 @app.route('/Admin_page', methods=['GET' , 'POST'])
 @login_required
@@ -237,10 +257,9 @@ class OutfitResource(Resource):
             db.session.commit()
             return jsonify({'message': 'Outfit deleted successfully'})
          else:
-               return jsonify({'error': 'Outfit not found'}), 404
+            return jsonify({'error': 'Outfit not found'}), 404
       else:
          return jsonify({'error': 'Outfit ID is required'}), 400
-
 
 # Register the API resources
 api.add_resource(OutfitResource, '/api/outfits', '/api/outfits/<int:outfit_id>')
@@ -309,7 +328,7 @@ def cart_page():
             flash('Not enough money to purchase', category='danger')
             return redirect(url_for('cart_page')) """
 
-   return render_template('includes/cart.html', cart_fit_details=cart_fit_details, Subtotals=Subtotals)
+   return render_template('cart.html', cart_fit_details=cart_fit_details, Subtotals=Subtotals)
 
 
 @app.route('/my_orders', methods=['GET', 'POST'])

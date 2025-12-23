@@ -1,7 +1,7 @@
 
 -- USE Uniform;
 
-SELECT * FROM outfits
+-- SELECT * FROM outfits
 -- DESCRIBE cart;
 -- SELECT * FROM outfits WHERE 
 -- DELETE FROM outfits WHERE id= 18
@@ -31,9 +31,9 @@ WHERE id IN (1, 2, 4, 6, 7, 8); */
 -- SELECT * FROM user
 -- SELECT * FROM user WHERE user_role = 1
 -- UPDATE user SET user_role = 1 WHERE id = 29
--- DELETE FROM user WHERE id = 38
+-- DELETE FROM user WHERE id IN(21);
 
--- SELECT * FROM roles
+SELECT * FROM roles
 -- SELECT * FROM roles WHERE 
 -- UPDATE roles SET user_role 'columnName'= 1 WHERE id = 29
 -- DELETE FROM roles WHERE
@@ -47,3 +47,5 @@ WHERE id IN (1, 2, 4, 6, 7, 8); */
 -- SELECT * FROM cart WHERE  
 -- UPDATE roles SET  'columnName'= 1 WHERE id = 29
 -- DELETE FROM cart WHERE
+
+-- DELETE FROM alembic_version WHERE version_num = '0b34d4bbbf99';

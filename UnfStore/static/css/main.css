@@ -7,8 +7,7 @@
     margin-left: 3%;
 }
 #navbarNav{
-    background: #5959a3;
-    /* margin-left: px; */
+    background: #1f2437;
 }
 
 #smallnav{
@@ -19,7 +18,6 @@
     padding: 15px;
     margin: 3px ;
     text-align: center;
-    /* justify-content: center; */
 }
 .detls2{
     padding: 3px;
@@ -64,8 +62,12 @@
 }
 #one .dropdown-item{
     border-radius: 3px;
+    color: white;
 }
-#tt:hover{
+#one .dropdown-item:hover{
+    background: #333;
+}
+#one .dropdown-item #tt:hover{
     background: rgb(221, 99, 99);
 }
 
@@ -212,4 +214,9 @@ input[type="submit"]:hover {
 }
 .payment-form button:hover {
     background-color: #45a049;
+}
+
+.end-cust{
+    right: 5%;
+    padding-top: 47px;
 }

@@ -38,7 +38,7 @@
                                         <!-- <li><a class="dropdown-item" href="#">Home</a></li> -->
                                         <li><a class="dropdown-item" href="{{url_for('cart_page')}}">Cart</a></li>
                                         <li><a class="dropdown-item" href="{{url_for('my_orders')}}">Orders</a></li>
-                                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                                        <li><a class="dropdown-item" href="{{url_for('profile_page')}}">Profile</a></li>
                                             <hr>
                                         <li><a class="dropdown-item" href="{{url_for('logout_page')}}" id="tt">Logout</a></li>
                                     </ul>
@@ -78,11 +78,11 @@
 
             </nav>
             
-            <div class="container" style="background: #5959a3; text-align:center ">
+            <div class="container" style="background: #1f2437; text-align:center ">
                 <ul class="navbar-nav col-6 text-white p-2" style="display: inline-block;" id="tagspc">
                     <a class="navbar-brand" href="{{url_for('cart_page')}}">Cart</a>
                     <a class="navbar-brand" href="{{url_for('my_orders')}}">Orders</a>
-                    <a class="navbar-brand" href="#">Profile</a>
+                    <a class="navbar-brand" href="{{url_for('profile_page')}}">Profile</a>
                 </ul>
             </div>
             
