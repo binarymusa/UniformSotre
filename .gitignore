@@ -4,9 +4,10 @@ migrations/
 
 # Environment files
 .env
-instance/
 
-# Python artifacts
+
+# Python and flask caches
+instance/__pycache__
 __pycache__/
 *.py[cod]
 *$py.class
