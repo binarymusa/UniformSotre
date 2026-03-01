@@ -1,5 +1,4 @@
-
-""" code for running the app """
+"app entry point"
 
 from UnfStore import app
 
