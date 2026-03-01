@@ -1,4 +1,4 @@
-
+#  run pip -r requirements.txt to install
 Flask
 flask-sqlalchemy
 flask-migrate
