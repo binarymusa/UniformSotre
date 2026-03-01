@@ -1,16 +1,21 @@
 # Virtual environment
-stdstack/
-migrations/
-
 # Environment files
 .env
-
+.venv
 
 # Python and flask caches
 instance/__pycache__
+UnfStore/__pycache__
 __pycache__/
 *.py[cod]
 *$py.class
+
+# databse , migrations and sessions
+/migrations/
+*.sql
+*.session.sql
+*.db
+*.sqlite
 
 # IDE specific files
 .idea/
@@ -36,10 +41,6 @@ htmlcov/
 # Translations
 *.mo
 *.pot
-
-# Flask stuff:
-instance/
-.webassets-cache
 
 # pyenv
 .python-version
